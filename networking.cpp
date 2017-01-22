@@ -1,17 +1,8 @@
 #include "networking.h"
 
-void ServiceByPortThread::run(){
-    done("finished");
-}
-
-void PortByServiceThread::run(){
-    done("finished");
-}
-
-void HostnameByIpThread::run(){
-    done("finished");
-}
-
-void IPByHostname::run(){
-    done("finished");
+void delay(int seconds)
+{
+    QTime dieTime= QTime::currentTime().addSecs(seconds);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }

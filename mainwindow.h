@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <string>
-#include "networking.h"
 
 namespace Ui {
 class MainWindow;
@@ -26,6 +25,7 @@ private slots:
     void on_pushButton_IbH_clicked();
 
 private:
+    void disableAll();
     void enableAll(const std::string& result);
     Ui::MainWindow *ui;
 };

@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "networking.h"
 
 using namespace std;
 
@@ -16,6 +17,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::enableAll(const string& result){
+    //make sure that there is a ui reff before updating
     ui->pushButton_SbP->setEnabled(true);
     ui->pushButton_PbS->setEnabled(true);
     ui->pushButton_IbH->setEnabled(true);
@@ -24,13 +26,20 @@ void MainWindow::enableAll(const string& result){
     ui->lineEdit_Result->setText(result.c_str());
 }
 
+void MainWindow::disableAll(){
+    ui->pushButton_PbS->setEnabled(false);
+    ui->pushButton_SbP->setEnabled(false);
+    ui->pushButton_HbI->setEnabled(false);
+    ui->pushButton_IbH->setEnabled(false);
+}
+
 void MainWindow::on_pushButton_SbP_clicked()
 {
     ui->lineEdit_Result->setText("Searching for Service...");
     //disable other options until result is found
-    ui->pushButton_HbI->setEnabled(false);
-    ui->pushButton_PbS->setEnabled(false);
-    ui->pushButton_IbH->setEnabled(false);
+    disableAll();
+    delay(3);
+    enableAll("done");
 
 }
 
@@ -38,28 +47,25 @@ void MainWindow::on_pushButton_PbS_clicked()
 {
     ui->lineEdit_Result->setText("Searching for Port...");
     //disable other options until result is found
-    ui->pushButton_HbI->setEnabled(false);
-    ui->pushButton_SbP->setEnabled(false);
-    ui->pushButton_IbH->setEnabled(false);
-
+    disableAll();
+    delay(3);
+    enableAll("done");
 }
 
 void MainWindow::on_pushButton_HbI_clicked()
 {
     ui->lineEdit_Result->setText("Searching for Hostname...");
     //disable other options until result is found
-    ui->pushButton_SbP->setEnabled(false);
-    ui->pushButton_PbS->setEnabled(false);
-    ui->pushButton_IbH->setEnabled(false);
-
+    disableAll();
+    delay(3);
+    enableAll("done");
 }
 
 void MainWindow::on_pushButton_IbH_clicked()
 {
     ui->lineEdit_Result->setText("Searching for IP...");
     //disable other options until result is found
-    ui->pushButton_HbI->setEnabled(false);
-    ui->pushButton_PbS->setEnabled(false);
-    ui->pushButton_SbP->setEnabled(false);
-
+    disableAll();
+    delay(3);
+    enableAll("done");
 }
