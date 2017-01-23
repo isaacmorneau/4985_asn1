@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>518</width>
-    <height>240</height>
+    <width>512</width>
+    <height>403</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,16 +25,6 @@
     </property>
     <property name="toolTip">
      <string>Port</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_Result">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>160</y>
-      <width>511</width>
-      <height>20</height>
-     </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -239,13 +229,23 @@
      <string>Protocol</string>
     </property>
    </widget>
+   <widget class="QTextBrowser" name="textBrowser_Result">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>160</y>
+      <width>491</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>518</width>
+     <width>512</width>
      <height>21</height>
     </rect>
    </property>

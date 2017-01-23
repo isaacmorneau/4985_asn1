@@ -49,11 +49,100 @@ std::string PbS(const std::string &service, const std::string &proto){
 }
 
 std::string HbI(const std::string &ip){
-    delay(3);
-    return "done";
+    std::string result;
+    std::stringstream ss;
+    int		a;
+    struct	hostent *hp;
+    struct	in_addr my_addr, *addr_p;
+    char	**p;
+    char	ip_address[256];      // String for IP address
+
+    WORD wVersionRequested = MAKEWORD(2,2);
+    WSADATA wsaData;
+    WSAStartup(wVersionRequested, &wsaData);
+
+    addr_p = (struct in_addr*)malloc(sizeof(struct in_addr));
+    addr_p = &my_addr;
+    if ((a = inet_addr(ip.c_str())) == 0){
+        result = "IP Address must be of the form x.x.x.x";
+        return result;
+    }
+
+    strcpy(ip_address, ip.c_str());
+
+    addr_p->s_addr=inet_addr(ip_address) ;
+    hp = gethostbyaddr((char *)addr_p, PF_INET, sizeof (my_addr));
+    if (hp == NULL)
+    {
+        ss << "host information for " << ip << " not found";
+        result = ss.str();
+        return result;
+    }
+    for (p = hp->h_addr_list; *p != 0; p++)
+    {
+        struct in_addr in;
+        char **q;
+
+        memcpy(&in.s_addr, *p, sizeof (in.s_addr));
+        ss << "IP Address: " << inet_ntoa(in) << "\t Host Name: " << hp->h_name << std::endl;
+        for (q = hp->h_aliases; *q != 0; q++)
+            ss << " \t\t   Aliases: " << *q << std::endl;
+    }
+    result = ss.str();
+    WSACleanup();
+    return result;
 }
 
 std::string IbH(const std::string &hostname){
-    delay(3);
-    return "done";
+    std::string result;
+    std::stringstream ss;
+    int		a;
+    struct	hostent *hp;
+    struct	in_addr my_addr, *addr_p;
+    char	**p;
+    char	ip_address[256];      // String for IP address
+
+    WORD wVersionRequested = MAKEWORD(2,2);
+    WSADATA wsaData;
+    WSAStartup(wVersionRequested, &wsaData);
+
+    addr_p = (struct in_addr*)malloc(sizeof(struct in_addr));
+    addr_p = &my_addr;
+
+        if ((hp = gethostbyname (hostname.c_str())) == NULL)
+        {
+            switch (h_errno)
+            {
+            case HOST_NOT_FOUND:
+                ss << "No such host " << hostname;
+                break;
+            case TRY_AGAIN:
+                ss << "host " << hostname << " try again later";
+                break;
+            case NO_RECOVERY:
+                ss <<"host " << hostname << " DNS Error\n";
+                break;
+            case NO_ADDRESS:
+                ss << "No IP Address for " << hostname;
+                break;
+            default:
+                ss << "Unknown Error: " << h_errno;
+                break;
+            }
+            result = ss.str();
+            return result;
+        }
+    for (p = hp->h_addr_list; *p != 0; p++)
+    {
+        struct in_addr in;
+        char **q;
+
+        memcpy(&in.s_addr, *p, sizeof (in.s_addr));
+        ss << "IP Address: " << inet_ntoa(in) << "\t Host Name: " << hp->h_name << std::endl;
+        for (q = hp->h_aliases; *q != 0; q++)
+            ss << " \t\t   Aliases: " << *q << std::endl;
+    }
+    result = ss.str();
+    WSACleanup();
+    return result;
 }

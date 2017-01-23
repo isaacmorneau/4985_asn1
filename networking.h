@@ -4,9 +4,10 @@
 #include <QTime>
 #include <QApplication>
 #include <string>
-
 #include <WinSock2.h>
 #include <stdio.h>
+#include <sstream>
+
 #pragma comment(lib, "ws2_32.lib")
 
 void delay(int seconds);
