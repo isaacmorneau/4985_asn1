@@ -38,8 +38,8 @@ void MainWindow::on_pushButton_SbP_clicked()
     ui->lineEdit_Result->setText("Searching for Service...");
     //disable other options until result is found
     disableAll();
-    SbP(ui->lineEdit_SbP->text().toStdString());
-    enableAll("done");
+    enableAll(SbP(ui->lineEdit_SbP->text().toStdString(),
+                  ui->lineEdit_SbP_2->text().toStdString()));
 
 }
 
@@ -48,8 +48,8 @@ void MainWindow::on_pushButton_PbS_clicked()
     ui->lineEdit_Result->setText("Searching for Port...");
     //disable other options until result is found
     disableAll();
-    PbS(ui->lineEdit_PbS->text().toStdString());
-    enableAll("done");
+    enableAll(PbS(ui->lineEdit_PbS->text().toStdString(),
+                  ui->lineEdit_PbS_2->text().toStdString()));
 }
 
 void MainWindow::on_pushButton_HbI_clicked()
@@ -57,8 +57,7 @@ void MainWindow::on_pushButton_HbI_clicked()
     ui->lineEdit_Result->setText("Searching for Hostname...");
     //disable other options until result is found
     disableAll();
-    HbI(ui->lineEdit_HbI->text().toStdString());
-    enableAll("done");
+    enableAll(HbI(ui->lineEdit_HbI->text().toStdString()));
 }
 
 void MainWindow::on_pushButton_IbH_clicked()
@@ -66,6 +65,5 @@ void MainWindow::on_pushButton_IbH_clicked()
     ui->lineEdit_Result->setText("Searching for IP...");
     //disable other options until result is found
     disableAll();
-    IbH(ui->lineEdit_IbH->text().toStdString());
-    enableAll("done");
+    enableAll(IbH(ui->lineEdit_IbH->text().toStdString()));
 }
