@@ -17,53 +17,90 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::enableAll(const string& result){
-    //make sure that there is a ui reff before updating
-    ui->pushButton_SbP->setEnabled(true);
-    ui->pushButton_PbS->setEnabled(true);
-    ui->pushButton_IbH->setEnabled(true);
-    ui->pushButton_HbI->setEnabled(true);
+    ui->pushButton_Find->setEnabled(true);
+    ui->lineEdit_bot->setEnabled(true);
+    ui->lineEdit_top->setEnabled(true);
 
     ui->textBrowser_Result->setText(result.c_str());
 }
 
+//disable other options until result is found
 void MainWindow::disableAll(){
-    ui->pushButton_PbS->setEnabled(false);
-    ui->pushButton_SbP->setEnabled(false);
-    ui->pushButton_HbI->setEnabled(false);
-    ui->pushButton_IbH->setEnabled(false);
+    ui->pushButton_Find->setEnabled(false);
+    ui->lineEdit_bot->setEnabled(false);
+    ui->lineEdit_top->setEnabled(false);
 }
 
-void MainWindow::on_pushButton_SbP_clicked()
+
+void MainWindow::SbP_clicked()
 {
     ui->textBrowser_Result->setText("Searching for Service...");
-    //disable other options until result is found
     disableAll();
-    enableAll(SbP(ui->lineEdit_SbP->text().toStdString(),
-                  ui->lineEdit_SbP_2->text().toStdString()));
-
+    enableAll(SbP(ui->lineEdit_top->text().toStdString(),
+                  ui->lineEdit_bot->text().toStdString()));
 }
 
-void MainWindow::on_pushButton_PbS_clicked()
+void MainWindow::PbS_clicked()
 {
     ui->textBrowser_Result->setText("Searching for Port...");
-    //disable other options until result is found
     disableAll();
-    enableAll(PbS(ui->lineEdit_PbS->text().toStdString(),
-                  ui->lineEdit_PbS_2->text().toStdString()));
+    enableAll(PbS(ui->lineEdit_top->text().toStdString(),
+                  ui->lineEdit_bot->text().toStdString()));
 }
 
-void MainWindow::on_pushButton_HbI_clicked()
+void MainWindow::HbI_clicked()
 {
     ui->textBrowser_Result->setText("Searching for Hostname...");
-    //disable other options until result is found
     disableAll();
-    enableAll(HbI(ui->lineEdit_HbI->text().toStdString()));
+    enableAll(HbI(ui->lineEdit_top->text().toStdString()));
 }
 
-void MainWindow::on_pushButton_IbH_clicked()
+void MainWindow::IbH_clicked()
 {
     ui->textBrowser_Result->setText("Searching for IP...");
-    //disable other options until result is found
     disableAll();
-    enableAll(IbH(ui->lineEdit_IbH->text().toStdString()));
+    enableAll(IbH(ui->lineEdit_top->text().toStdString()));
+}
+
+void MainWindow::on_pushButton_Find_clicked()
+{
+    if(ui->radioButton_SbP->isChecked())
+        SbP_clicked();
+    if(ui->radioButton_PbS->isChecked())
+        PbS_clicked();
+    if(ui->radioButton_HbI->isChecked())
+        HbI_clicked();
+    if(ui->radioButton_IbH->isChecked())
+        IbH_clicked();
+}
+
+void MainWindow::on_radioButton_SbP_clicked()
+{
+   ui->lineEdit_top->setToolTip("Port");
+   ui->lineEdit_bot->setToolTip("Protocol");
+   ui->lineEdit_bot->setEnabled(true);
+}
+
+void MainWindow::on_radioButton_PbS_clicked()
+{
+
+   ui->lineEdit_top->setToolTip("Service");
+   ui->lineEdit_bot->setToolTip("Protocol");
+   ui->lineEdit_bot->setEnabled(true);
+}
+
+void MainWindow::on_radioButton_IbH_clicked()
+{
+
+   ui->lineEdit_top->setToolTip("Hostname");
+   ui->lineEdit_bot->setToolTip("Not Used For Query");
+   ui->lineEdit_bot->setEnabled(false);
+}
+
+void MainWindow::on_radioButton_HbI_clicked()
+{
+
+   ui->lineEdit_top->setToolTip("IP Address");
+   ui->lineEdit_bot->setToolTip("Not Used For Query");
+   ui->lineEdit_bot->setEnabled(false);
 }

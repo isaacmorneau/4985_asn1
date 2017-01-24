@@ -16,13 +16,19 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 private slots:
-    void on_pushButton_SbP_clicked();
+    void on_pushButton_Find_clicked();
+    void IbH_clicked();
+    void HbI_clicked();
+    void PbS_clicked();
+    void SbP_clicked();
 
-    void on_pushButton_PbS_clicked();
+    void on_radioButton_SbP_clicked();
 
-    void on_pushButton_HbI_clicked();
+    void on_radioButton_PbS_clicked();
 
-    void on_pushButton_IbH_clicked();
+    void on_radioButton_IbH_clicked();
+
+    void on_radioButton_HbI_clicked();
 
 private:
     void disableAll();

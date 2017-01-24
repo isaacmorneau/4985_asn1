@@ -61,7 +61,6 @@ std::string HbI(const std::string &ip){
     WSADATA wsaData;
     WSAStartup(wVersionRequested, &wsaData);
 
-    addr_p = (struct in_addr*)malloc(sizeof(struct in_addr));
     addr_p = &my_addr;
     if ((a = inet_addr(ip.c_str())) == 0){
         result = "IP Address must be of the form x.x.x.x";
@@ -106,7 +105,6 @@ std::string IbH(const std::string &hostname){
     WSADATA wsaData;
     WSAStartup(wVersionRequested, &wsaData);
 
-    addr_p = (struct in_addr*)malloc(sizeof(struct in_addr));
     addr_p = &my_addr;
 
         if ((hp = gethostbyname (hostname.c_str())) == NULL)
