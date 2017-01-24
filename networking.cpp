@@ -9,7 +9,7 @@ void delay(int seconds)
 
 std::string SbP(const std::string &port, const std::string &proto){
     std::string result;
-    char buffer[256];
+    std::stringstream ss;
     struct servent *sv;
     int s_port;
 
@@ -21,17 +21,17 @@ std::string SbP(const std::string &port, const std::string &proto){
 
     sv = getservbyport (htons(s_port), proto.c_str());
     if (sv == NULL)
-        sprintf(buffer,"Service not found for port %d",s_port);
+        ss << "Service not found for port " << s_port;
     else
-        sprintf(buffer, "The service for %s port %d is: %s", proto.c_str(), s_port, sv->s_name);
-    result = buffer;
+        ss << "The service for " << proto << " port " << s_port << " is: " << sv->s_name;
+    result = ss.str();
     WSACleanup();
     return result;
 }
 
 std::string PbS(const std::string &service, const std::string &proto){
     std::string result;
-    char buffer[256];
+    std::stringstream ss;
     struct servent *sv;
 
     WORD wVersionRequested = MAKEWORD(2,2);
@@ -40,10 +40,10 @@ std::string PbS(const std::string &service, const std::string &proto){
 
     sv = getservbyname (service.c_str(), proto.c_str());
     if (sv == NULL)
-        sprintf(buffer,"Port not found for service %s", service.c_str());
+        ss << "Port not found for service " << service.c_str();
     else
-        sprintf (buffer, "The port number for %s is: %d\n", service.c_str(), ntohs(sv->s_port));
-    result = buffer;
+        ss << "The port number for " << service.c_str() << " is: " << ntohs(sv->s_port);
+    result = ss.str();
     WSACleanup();
     return result;
 }
