@@ -17,10 +17,6 @@ public:
     ~MainWindow();
 private slots:
     void on_pushButton_Find_clicked();
-    void IbH_clicked();
-    void HbI_clicked();
-    void PbS_clicked();
-    void SbP_clicked();
 
     void on_radioButton_SbP_clicked();
 
@@ -31,7 +27,6 @@ private slots:
     void on_radioButton_HbI_clicked();
 
 private:
-    void disableAll();
     void enableAll(const std::string& result);
     Ui::MainWindow *ui;
 };
