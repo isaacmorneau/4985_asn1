@@ -69,8 +69,12 @@ std::string HbI(const std::string &ip){
 
     strcpy(ip_address, ip.c_str());
 
-    addr_p->s_addr=inet_addr(ip_address) ;
+    addr_p->s_addr=inet_addr(ip_address);
+
+    //use blocking call but process events before and after to hide any freeze
+    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
     hp = gethostbyaddr((char *)addr_p, PF_INET, sizeof (my_addr));
+    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
     if (hp == NULL)
     {
         ss << "host information for " << ip << " not found";
@@ -95,11 +99,9 @@ std::string HbI(const std::string &ip){
 std::string IbH(const std::string &hostname){
     std::string result;
     std::stringstream ss;
-    int		a;
     struct	hostent *hp;
     struct	in_addr my_addr, *addr_p;
     char	**p;
-    char	ip_address[256];      // String for IP address
 
     WORD wVersionRequested = MAKEWORD(2,2);
     WSADATA wsaData;
@@ -107,29 +109,32 @@ std::string IbH(const std::string &hostname){
 
     addr_p = &my_addr;
 
-        if ((hp = gethostbyname (hostname.c_str())) == NULL)
+    //use blocking call but process events before and after to hide any freeze
+    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    if ((hp = gethostbyname (hostname.c_str())) == NULL)
+    {
+        switch (h_errno)
         {
-            switch (h_errno)
-            {
-            case HOST_NOT_FOUND:
-                ss << "No such host " << hostname;
-                break;
-            case TRY_AGAIN:
-                ss << "host " << hostname << " try again later";
-                break;
-            case NO_RECOVERY:
-                ss <<"host " << hostname << " DNS Error\n";
-                break;
-            case NO_ADDRESS:
-                ss << "No IP Address for " << hostname;
-                break;
-            default:
-                ss << "Unknown Error: " << h_errno;
-                break;
-            }
-            result = ss.str();
-            return result;
+        case HOST_NOT_FOUND:
+            ss << "No such host " << hostname;
+            break;
+        case TRY_AGAIN:
+            ss << "host " << hostname << " try again later";
+            break;
+        case NO_RECOVERY:
+            ss <<"host " << hostname << " DNS Error\n";
+            break;
+        case NO_ADDRESS:
+            ss << "No IP Address for " << hostname;
+            break;
+        default:
+            ss << "Unknown Error: " << h_errno;
+            break;
         }
+        result = ss.str();
+        return result;
+    }
+    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
     for (p = hp->h_addr_list; *p != 0; p++)
     {
         struct in_addr in;

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>275</height>
+    <width>419</width>
+    <height>286</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,18 +18,6 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>400</width>
-    <height>275</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>400</width>
-    <height>275</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>4985 Asn1 - A00958405</string>
@@ -65,7 +53,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>110</y>
+      <y>120</y>
       <width>47</width>
       <height>13</height>
      </rect>
@@ -91,8 +79,8 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>130</y>
-      <width>381</width>
+      <y>140</y>
+      <width>401</width>
       <height>111</height>
      </rect>
     </property>
@@ -102,7 +90,7 @@
      <rect>
       <x>10</x>
       <y>100</y>
-      <width>381</width>
+      <width>401</width>
       <height>21</height>
      </rect>
     </property>
@@ -128,7 +116,7 @@
      <rect>
       <x>320</x>
       <y>10</y>
-      <width>61</width>
+      <width>91</width>
       <height>21</height>
      </rect>
     </property>
@@ -140,8 +128,8 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>30</y>
-      <width>61</width>
+      <y>40</y>
+      <width>91</width>
       <height>16</height>
      </rect>
     </property>
@@ -153,8 +141,8 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>50</y>
-      <width>71</width>
+      <y>70</y>
+      <width>91</width>
       <height>16</height>
      </rect>
     </property>
@@ -175,7 +163,7 @@
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -230,16 +218,12 @@
      </item>
     </layout>
    </widget>
+   <zorder>layoutWidget</zorder>
    <zorder>lineEdit_top</zorder>
    <zorder>pushButton_Find</zorder>
    <zorder>label_5</zorder>
    <zorder>lineEdit_bot</zorder>
    <zorder>textBrowser_Result</zorder>
-   <zorder>radioButton_SbP</zorder>
-   <zorder>radioButton_PbS</zorder>
-   <zorder>radioButton_IbH</zorder>
-   <zorder>radioButton_HbI</zorder>
-   <zorder>radioButton_PbS</zorder>
    <zorder>line</zorder>
    <zorder>line_2</zorder>
    <zorder>label</zorder>
@@ -252,7 +236,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>419</width>
      <height>21</height>
     </rect>
    </property>
