@@ -1,12 +1,5 @@
 #include "networking.h"
 
-void delay(int seconds)
-{
-    QTime dieTime= QTime::currentTime().addSecs(seconds);
-    while (QTime::currentTime() < dieTime)
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-}
-
 std::string SbP(const std::string &port, const std::string &proto){
     std::string result;
     std::stringstream ss;

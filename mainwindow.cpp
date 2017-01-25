@@ -16,10 +16,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::enableAll(const string& result){
-
-}
-
 void MainWindow::on_pushButton_Find_clicked()
 {
     //disable controls
